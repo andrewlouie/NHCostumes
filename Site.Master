@@ -1,0 +1,167 @@
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="NHCostumes.Site2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - NH Costumes</title>
+    <meta name="title" content="NH Costumes"/>
+	<meta name="description" content="Kitchener Waterloo Area Costume Sales and Rentals"/>
+    <meta name="keywords" content="costume, halloween, rental, rentals, sales, sale, kitchener, waterloo, cambridge, ayr, bloomingdale, kids, children, years, old, adult, accessories, masks, hats, consignment, consignors, superhero, spiderman, batman, ironman"/>
+	<meta name="author" content="Andrew Aaron"/>
+    <meta name="msvalidate.01" content="1DF207218CE9C1D5EEB966B785C70EBF" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="Scripts/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./jCarousel/skin.css"/>
+<link rel="stylesheet" type="text/css" href="./jCarousel/jquery.jcarousel.css"/>
+    <link rel="alternate" href="http://www.nhcostumes.ca" hreflang="en-ca" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="./fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="Content/Site.css"/>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67677030-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<body>
+        
+       <form runat="server"><asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+   <div class="aaheader"><a runat="server" href="~/"></a>
+        <div class="aafixed"><a runat="server" href="~/Contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> CONTACT</a> | 
+           <a runat="server" href="~/ShoppingCart">
+               <span class='glyphicon glyphicon-shopping-cart' aria-hidden='true'></span>CART <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
+               <span id='itemsincart' runat="server">0</span></ContentTemplate></asp:UpdatePanel> ITEMS
+               </a><div class="arrow-up"></div><div class="itemadded">Item Added</div>
+           </div>
+       
+    </div>
+         <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a runat="server" id="adminLink" visible="false" 
+                          href="~/Admin/AdminPage">Admin</a></li>
+                <li runat="server" id="lihome"><a runat="server" href="~/">HOME</a></li>
+              
+              
+              <li class="dropdown" id="lichild" runat="server">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CHILDREN <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Child" runat="server">All</a></li><li class="divider"></li>
+                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+                        <ItemTemplate> 
+                            <li>
+                               <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# "Child#" + Eval("category") %>'><%# Eval("category") %></asp:HyperLink>
+                            </li>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
+                </li>
+              <li class="dropdown" runat="server" id="liadult">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADULTS<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Adult" runat="server">All</a></li><li class="divider"></li>
+                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
+                        <ItemTemplate> 
+                            <li>
+                               <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# "Adult#" + Eval("category") %>'><%# Eval("category") %></asp:HyperLink>
+                            </li>
+
+                        </ItemTemplate>
+                    </asp:Repeater>       
+                </ul>
+                </li>
+         
+
+<li class="dropdown" runat="server" id="liaccessories">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ACCESSORIES <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="~/Accessories" runat="server">All</a></li>
+                    <li class="divider"></li>
+                           <asp:Repeater ID="Repeater3" runat="server" DataSourceID="SqlDataSource3">
+                        <ItemTemplate> 
+                            <li>
+                               <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# "Accessories#" + Eval("category") %>'><%# Eval("category") %></asp:HyperLink>
+                            </li>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
+               </li>     
+              <li runat="server" id="liconsignors"><a href="consignors">CONSIGNORS</a></li>
+              <li runat="server" id="liabout"><a runat="server" href="~/About">ABOUT US</a></li>
+              <li runat="server" id="lifaq"><a runat="server" href="~/FAQ">FAQ</a></li>
+                <li runat="server" id="licontact"><a runat="server" href="~/Contact">CONTACT</a></li>
+            </ul>
+             
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      
+      </nav>
+      <div class="container-fluid">
+<div class="row">
+<div class="col-md-4 col-md-push-8">
+    <asp:Panel ID="Panel1" runat="server">
+<asp:Button runat="server" id="aasearchbtn" OnClick="aasearchbtn_Click" Text="SEARCH"/>
+    <asp:TextBox CssClass="form-control" placeholder="search for NH Costumes..." id="aasearchbox" runat="server"></asp:TextBox><br/><br/><br/></asp:Panel>
+</div></div></div><div class="container container-fluid">
+           <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder></div>
+      <div class="aafooter">
+<div id="footcont"> 
+<div class="row">
+<div class="col-sm-4">
+<h4>COSTUMES</h4>
+<a href="~/Child" runat="server">CHILDREN</a><br/>
+<a href="~/Adult" runat="server">ADULTS</a><br/>
+<a href="~/Accessories" runat="server">ACCESSORIES</a>
+</div>
+<div class="col-sm-4">
+<h4>CUSTOMER SERVICE</h4>
+<a href="~/consignors" runat="server">CONSIGNORS</a><br/>
+<a href="~/About" runat="server">ABOUT US</a><br/>
+<a href="~/FAQ" runat="server">FAQ</a>
+</div>
+<div class="col-sm-4">
+<div class="row">
+<div class="col-sm-6">
+<h4>CONTACT US</h4>
+<a href="~/Contact" runat="server">CONTACT FORM</a><br/>
+<a href="mailto:nhcostumes@gmail.com">EMAIL</a><br/>
+<a href="https://www.facebook.com/pages/NH-Costumes/787666584609263?fref=ts">FACEBOOK</a><br/><br/>
+    50 Kraft Drive
+<br/>
+Kitchener, Ontario</div><div class="col-sm-6">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2894.709104086608!2d-80.46597489999999!3d43.4875408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882bf3379e598a3b%3A0x7f8a966af4ca1518!2s50+Kraft+Dr%2C+Waterloo%2C+ON+N2J+4G8!5e0!3m2!1sen!2sca!4v1441847906432" width="400" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div></div></div>
+</div><br/><br/>
+<div class="aacopy">&copy; Copyright <%: DateTime.Now.Year %> NH Costumes - Website by Andrew Aaron</div>
+</div>
+      </div>
+ <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionString %>" SelectCommand="SELECT DISTINCT SUBSTRING(category,CHARINDEX(' ',category) + 1,999),category,CAST(SUBSTRING(category,0,CHARINDEX('-',category)) AS INT) FROM costumes WHERE topcategory = 'Child' AND visible = 1 AND quantity > 0 ORDER BY SUBSTRING(category,CHARINDEX(' ',category) + 1,999),CAST(SUBSTRING(category,0,CHARINDEX('-',category)) AS INT);"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionString %>" SelectCommand="SELECT DISTINCT category FROM costumes WHERE topcategory = 'Adult' AND visible = 1 AND quantity > 0  ORDER BY category;"></asp:SqlDataSource>
+<asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionString %>" SelectCommand="SELECT DISTINCT category FROM costumes WHERE topcategory = 'Accessories' AND visible = 1 AND quantity > 0 ORDER BY category;"></asp:SqlDataSource>
+      </form>
+</body>
+</html>
